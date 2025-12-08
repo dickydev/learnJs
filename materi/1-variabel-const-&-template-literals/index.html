@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 1 - Variabel & Template Literal</title>
+    <style>
+      h1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>BELAJAR</h1>
+    <div id="root"></div>
+    <script>
+      // Variabel Javascript -> camelCase
+      const APP_TITLE = "Materi 1 - Variabel & Template Literal";
+      const userData = {
+        name: "Ucup",
+        role: "Senior Software Engineer",
+        activeTask: 2000,
+      };
+
+      const elementHeader = `
+        <div>
+            <h1>${APP_TITLE} </h1>
+            <ul>
+                <h3>Biodata User</h3>
+                <li>${userData.name}</li>    
+                <li>${userData.role}</li>    
+                <li>${userData.activeTask}</li>    
+            </ul>
+        </div>
+      `;
+
+      document.getElementById("root").innerHTML = elementHeader;
+    </script>
+  </body>
+</html>
