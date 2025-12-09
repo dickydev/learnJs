@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 3 - Destructure Object</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const taskData1 = {
+        id: 101,
+        title: "Siapkan Repo GitHub",
+        priority: "High",
+        status: "Selesai",
+      };
+
+      const taskData2 = {
+        id: 102,
+        title: "Desain Database",
+        priority: "Medium",
+        assignee: "Budi",
+      };
+
+      const taskData3 = {
+        id: 103,
+        title: "Ngoding",
+        priority: "Medium",
+        assignee: "Ucup",
+      };
+
+      const TaskComponent = ({ title, priority, assignee = "Unassigned" }) =>
+        `
+          <div>
+            <h2>${title}</h2>
+            <p>Priority : ${priority}</p>
+            <p>Assign To : ${assignee}</p>
+          </div>
+        `;
+
+      const container = document.getElementById("root");
+
+      const html1 = TaskComponent(taskData1);
+      const html2 = TaskComponent(taskData2);
+      const html3 = TaskComponent(taskData3);
+
+      container.innerHTML = html1 + html2 + html3;
+    </script>
+  </body>
+</html>
