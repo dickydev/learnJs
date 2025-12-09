@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 2 - Arrow Function & Return</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const dummyData = [
+        { title: "Desain UI Homepage", priority: "High", done: false },
+        { title: "Fix Bug Login", priority: "Medium", done: false },
+        { title: "Meeting Klien", priority: "Low", done: true },
+      ];
+
+      const createTaskCard = (task) =>
+        `
+            <div>
+                <h3>${task.title}</h3>
+                <p>${task.priority} | <span>${
+          task.done ? "SUDAH SELESAI" : "BELUMAN NIH"
+        }</span></p>
+            </div>
+        `;
+
+      const container = document.getElementById("root");
+      container.innerHTML = dummyData.map(createTaskCard).join("");
+
+      // HOF -> High Order Function -> Fungsi menjadi argument fungsi lain
+    </script>
+  </body>
+</html>
