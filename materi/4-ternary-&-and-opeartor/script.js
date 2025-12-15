@@ -1,0 +1,5 @@
+/**
+ * Ternary Operator
+ * 
+ * Syntax :
+ */
