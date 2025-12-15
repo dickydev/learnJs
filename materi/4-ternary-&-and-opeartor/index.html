@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 3 - Ternary & And Operator</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const tasks = [
+        { title: "Fix Bug Critical", priority: "High", isDone: true },
+        { title: "Update Dokumentasi", priority: "Low", isDone: false },
+        { title: "Rapat Mingguan", priority: "High", isDone: false },
+      ];
+
+      const createTaskCard = (task) => {
+        const badgeColor = task.priority === "High" ? "red" : "blue";
+        const buttonEdit = !task.isDone === true ? true : "";
+        return `
+            <div>
+                <h3 style="background-color: ${badgeColor}; color: white" >${
+          task.title
+        } | ${task.priority} | ${task.isDone ? "Sudah Selesai" : ""}</h3>
+                <div>
+                    ${
+                      buttonEdit &&
+                      `
+                        <button>edit</button>
+                    `
+                    }
+                    <button>
+                        ${task.isDone ? "Arsipkan" : "Selesai"}
+                    </button>
+                </div>
+            </div>
+        `;
+      };
+
+      document.getElementById("root").innerHTML = tasks
+        .map(createTaskCard)
+        .join("");
+    </script>
+  </body>
+</html>
