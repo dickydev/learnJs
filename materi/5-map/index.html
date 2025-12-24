@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 5 - Map</title>
+  </head>
+  <body>
+    <h1>TODO LIST</h1>
+    <div id="root"></div>
+    <script>
+      const taskData = [
+        {
+          id: 1,
+          title: "Belajar JavaScript Dasar",
+          priority: "High",
+          status: "Done",
+        },
+        {
+          id: 2,
+          title: "Pahami Konsep React",
+          priority: "High",
+          status: "In Progress",
+        },
+        { id: 3, title: "Istirahat Sejenak", priority: "Low", status: "To Do" },
+        {
+          id: 4,
+          title: "Setup Tailwind CSS",
+          priority: "Medium",
+          status: "Done",
+        },
+      ];
+
+      const taskToHTML = (task) => {
+        const { title, priority, status } = task;
+
+        const borderClass = priority === "High" ? "red" : "white";
+
+        let bgClass = "";
+
+        switch (status) {
+          case "Done":
+            bgClass = "green";
+            break;
+          case "In Progress":
+            bgClass = "yellow";
+            break;
+          case "To Do":
+            bgClass = "blue";
+            break;
+          default:
+            bgClass = "gray";
+        }
+
+        return `<div style="background-color: ${bgClass}; margin: 5px; text-align: center">
+                <div>
+                    <h2>${title}</h2>
+                    <p style=" background: ${borderClass}; color: ${
+                    borderClass == "red" ? "white" : "black"
+                    };>${priority}</p>
+                </div>
+                <span  >${status}</span>
+            </div>`;
+      };
+
+      const bodyContainer = document.getElementById("root");
+      const generateHTML = taskData.map(taskToHTML).join("");
+
+      bodyContainer.innerHTML = generateHTML;
+    </script>
+  </body>
+</html>
