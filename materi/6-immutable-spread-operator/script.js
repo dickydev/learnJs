@@ -5,13 +5,13 @@
 const userList = ["Aji", "Renday", "Ucup"];
 
 // Contoh yang salah
-// console.log("Data Lama : ", userList);
+console.log("Data Lama : ", userList);
 userList.push("Lusi");
-// console.log("Data Baru : ", userList);
+console.log("Data Baru : ", userList);
 
 // Contoh yang benar
 const userListBaru = ["Lusi", ...userList];
-// console.log("Data Baru : ", userListBaru);
+console.log("Data Baru : ", userListBaru);
 
 const user = {
   nama: "Aji",
