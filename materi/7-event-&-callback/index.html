@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 7 - Event & Callback</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      /**
+       * Class => kebab-case : input-tugas
+       * id => camelCase: btnTambah
+       */
+
+      const konten = document.getElementById("root");
+
+      konten.innerHTML = `
+        <h1>Task Manager</h1>
+
+        <input type="text" id="input-tugas" placeholder="Masukkan tugas..." />
+        <button id="btn-tambah">Tambah</button>
+
+        <ul id="task-list">
+            <li id="tugas-1">
+                Contoh : Belajar Event & Callback
+                <button class="btn-hapus" data-id="tugas-1">Hapus</button>
+            </li>
+        </ul>
+      `;
+
+      const tambahTugas = () => {
+        const input = document.getElementById("input-tugas");
+        const list = document.getElementById("task-list");
+
+        if (input.value.trim() === "") return alert("ISI TUGASNNYA LAAA....");
+
+        const idUnik = "tugas-" + Date.now();
+
+        const listBaru = document.createElement("li");
+        listBaru.id = idUnik;
+        listBaru.innerHTML = `
+            ${input.value}
+            <button class="btn-hapus" data-id="${idUnik}">Hapus</button>
+        `;
+        list.appendChild(listBaru);
+        input.value = "";
+      };
+
+      konten.addEventListener("click", (event) => {
+        if (event.target.id === "btn-tambah") {
+          tambahTugas();
+        }
+
+        if (event.target.classList.contains("btn-hapus")) {
+          const idYangMauDiHapus = event.target.getAttribute("data-id");
+          const elementTugas = document.getElementById(idYangMauDiHapus);
+          elementTugas.remove();
+        }
+      });
+    </script>
+  </body>
+</html>

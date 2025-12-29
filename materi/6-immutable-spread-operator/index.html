@@ -3,80 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Materi 6 - Immutable Spread Operator</title>
+    <title>Document</title>
   </head>
   <body>
-    <div>
-      <h1>Demo Immutability</h1>
-      <div>
-        <h2>1. Array Spread (Add Task)</h2>
-        <div>
-          <input id="input-task" type="text" placeholder="Tugas baru..." />
-          <button onclick="handleAddTask()">+ Tambah (Spread)</button>
-        </div>
-        <div>
-          <p>Isi Array Saat Ini:</p>
-          <code id="array-output"></code>
-        </div>
-      </div>
-
-      <div>
-        <h2>2. Object Spread (Update User)</h2>
-        <div>
-          <div id="user-card"></div>
-          <button onclick="handleUpgrade()">Upgrade ke Premium</button>
-        </div>
-        <div>
-          <p>Isi Object Saat Ini:</p>
-          <code id="object-output"></code>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const [task, setTask] = useState(["Belajar HTML", "Belajar CSS"]);
-      let tasks = ["Belajar HTML", "Belajar CSS"];
-
-      let user = {
-        id: 101,
-        name: "Tri Aji",
-        type: "Free",
-      };
-
-      function render() {
-        document.getElementById("array-output").innerText =
-          JSON.stringify(task);
-        document.getElementById("object-output").innerText =
-          JSON.stringify(user);
-        document.getElementById("user-card").innerHTML = `
-            <p>
-                ${user.name}
-                | <span>${user.type} Account</span>
-            </p>
-        `;
-      }
-
-      function handleAddTask() {
-        const inputUser = document.getElementById("input-task");
-        const newTask = inputUser.value;
-
-        if (!newTask) return;
-
-        setTask((prev) => [...prev, newTask]);
-
-        inputUser.value = "";
-        render(newTasks);
-      }
-
-      function handleUpgrade() {
-        user = {
-          ...user,
-          type: "Premium",
-        };
-        render();
-      }
-
-      render();
-    </script>
+    <h1>HELLO KHEREN</h1>
   </body>
 </html>
