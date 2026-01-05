@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 8 - Filter</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const konten = document.getElementById("root");
+
+      let tasks = [
+        { id: 1, title: "Belajar JavaScript", isDone: false },
+        { id: 2, title: "Belajar React", isDone: false },
+        { id: 3, title: "Belajar Node.js", isDone: false },
+      ];
+
+      let currentFilter = "all";
+
+      const render = () => {
+        const filteredTasks = tasks.filter((task) => {
+          if (currentFilter === "active") return !task.isDone;
+          if (currentFilter === "done") return task.isDone;
+          return true;
+        });
+
+        konten.innerHTML = `
+            <h1>Task Manager</h1>
+
+            <input type="text" id="inputTugas" placeholder="Masukkan tugass...." />
+            <button id="btnTambah">Tambah</button>
+
+            <div style="margin: 15px 0">
+                <button id="btnFilterAll" ${
+                  currentFilter === "all" ? "disabled" : ""
+                }>Semua</button>
+                <button id="btnFilterActive" ${
+                  currentFilter === "active" ? "disabled" : ""
+                }>Aktif</button>
+                <button id="btnFilterDone" ${
+                  currentFilter === "done" ? "disabled" : ""
+                }>Sudah Selesai</button>
+            </div>
+            <ul>
+                ${filteredTasks.length === 0 ? "<li>Tidak ada tugas </li>" : ""}
+                ${filteredTasks
+                  .map(
+                    (task) => `
+                    <li>
+                        <input
+                            type="checkbox"
+                            class="toggle-done"
+                            data-id="${task.id}"
+                            ${task.isDone ? "checked" : ""}
+                        >
+                        <span style="text-decoration: ${
+                          task.isDone ? "line-through" : "none"
+                        }">${task.title}</span>
+                        <button class="btn-hapus" data-id="${
+                          task.id
+                        }">Hapus</button>
+                    </li>
+                `
+                  )
+                  .join("")}
+            </ul>
+        `;
+      };
+
+      const tambahTugas = () => {
+        const input = document.getElementById("inputTugas");
+        if (input.value.trim() === "") {
+          alert("WOY ISI TUGASNYA.....");
+          return;
+        }
+
+        const tugasBaru = {
+          id: Date.now() + String(Math.floor(Math.random())),
+          title: input.value,
+          isDone: false,
+        };
+
+        tasks = [...tasks, tugasBaru];
+        input.value = "";
+        render();
+      };
+
+      const hapusTugas = (id) => {
+        tasks = tasks.filter((task) => task.id !== Number(id));
+        render();
+      };
+
+      const toggleDone = (id) => {
+        tasks = tasks.map((task) => {
+          if (task.id === Number(id)) {
+            return { ...task, isDone: !task.isDone };
+          }
+          return task;
+        });
+        render();
+      };
+
+      konten.addEventListener("click", (event) => {
+        if (event.target.id === "btnTambah") {
+          tambahTugas();
+        }
+        if (event.target.classList.contains("btn-hapus")) {
+          hapusTugas(event.target.dataset.id);
+        }
+        if (event.target.classList.contains("btnFilterAll")) {
+          currentFilter = "all";
+          render();
+        }
+        if (event.target.classList.contains("btnFilterActive")) {
+          currentFilter = "active";
+          render();
+        }
+        if (event.target.classList.contains("btnFilterDone")) {
+          currentFilter = "done";
+          render();
+        }
+      });
+
+      konten.addEventListener("change", (event) => {
+        if (event.target.classList.contains("toggle-done")) {
+          toggleDone(event.target.dataset.id);
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>
