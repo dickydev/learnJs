@@ -77,7 +77,7 @@
         }
 
         const tugasBaru = {
-          id: Date.now() + String(Math.floor(Math.random())),
+          id: Date.now() + Math.floor(Math.random() * 1000),
           title: input.value,
           isDone: false,
         };
@@ -109,15 +109,15 @@
         if (event.target.classList.contains("btn-hapus")) {
           hapusTugas(event.target.dataset.id);
         }
-        if (event.target.classList.contains("btnFilterAll")) {
+        if (event.target.id === "btnFilterAll") {
           currentFilter = "all";
           render();
         }
-        if (event.target.classList.contains("btnFilterActive")) {
+        if (event.target.id === "btnFilterActive") {
           currentFilter = "active";
           render();
         }
-        if (event.target.classList.contains("btnFilterDone")) {
+        if (event.target.id === "btnFilterDone") {
           currentFilter = "done";
           render();
         }
