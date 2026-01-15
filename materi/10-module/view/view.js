@@ -30,3 +30,5 @@ export const App = (tasks) => {
         </div>
     `;
 };
+
+// TUGAS : MEMBUAT BUTTON CEKLIS DENGAN INPUT CHECKBOX SEPERTI PADA TEMPLATE CODE DIATAS
