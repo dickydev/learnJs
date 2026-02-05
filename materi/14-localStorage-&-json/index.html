@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 14 - LocalStorage & JSON</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root");
+      const STORAGE_KEY = "task_data";
+
+      let tasks = loadTasks();
+      let taskSearched = [
+        "Belajar JavaScript",
+        "Belajar React",
+        "Belajar Node.js",
+        "Baca Dokumentasi",
+        "Deploy Aplikasi",
+        "Debug Error",
+        "Belajar Testing",
+      ];
+      let keyword = "";
+
+      const onSearch = (payload) => {
+        keyword = payload.toLowerCase();
+      };
+
+      const filteredTasks = () => {
+        return tasks.filter((task) => {
+          task.toLowerCase().includes(keyword);
+        });
+      };
+
+      const addTask = () => {
+        const input = document.getElementById("taskInput");
+        if (!input.value) return;
+
+        tasks = [...tasks, input.value];
+        saveTasks(tasks);
+        render();
+      };
+
+      // Kirim Data
+      const saveTasks = (tasks) => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      };
+
+      // Ambil Data
+      function loadTasks() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      }
+
+      function resetData() {
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.reload();
+      }
+
+      function generateData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(taskSearched));
+      }
+
+      const render = () => {
+        root.innerHTML = `
+            <h1>Auto Save Task</h1>
+
+            <input id="taskInput" placeholder="Masukkan tugas...."/>
+            <input id="cari" placeholder="Cari tugas...." onInput="onSearch(this.value)"/>
+
+            <button onclick="addTask()">Simpan</button>
+            <button onclick="resetData()">Reset LocalStorage</button>
+            <button onclick="generateData()">Generate Data</button>
+
+            <ul>
+                ${tasks.map((task) => `<li>${task}</li>`).join("")}
+            </ul>
+            <ul>
+                <h1>Filtered Data</h1>
+                ${
+                  keyword
+                    ? filteredTasks()
+                        .map((task) => `<li>${task}</li>`)
+                        .join("")
+                    : ""
+                } 
+            </ul>
+        `;
+      };
+
+      render();
+    </script>
+  </body>
+</html>

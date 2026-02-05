@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 12 - Optional Chaining</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root");
+
+      const tasks = [
+        { id: 1, title: "Tugas Lengkap", meta: { info: { tag: "Penting" } } },
+        { id: 2, title: "Tugas Bolong", meta: null }, // meta null
+        {
+          id: 3,
+          title: "Tugas Polos",
+          meta: { info: { tag: "Super Penting" } },
+        }, // meta tidak ada sama sekali
+        {
+          id: 4,
+          title: "Tugas Yang Polos",
+        }, // meta tidak ada sama sekali
+      ];
+
+      const render = () => {
+        root.innerHTML = `
+            <h1>Handle Data Kotor</h1>
+            <ul id='taskList'></ul
+        `;
+        const listContainer = document.getElementById("taskList");
+
+        const html = tasks
+          .map((task) => {
+            const tag = task?.meta?.info?.tag ?? "Umum";
+
+            return `
+              <li>
+                  <span>${task.title}</span> - <span>${tag}</span>
+              </li>
+          `;
+          })
+          .join("");
+        listContainer.innerHTML = html;
+      };
+
+      render();
+    </script>
+  </body>
+</html>
