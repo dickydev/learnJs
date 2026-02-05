@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 13 - Computed Property Names</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root");
+
+      let formData = {
+        title: "",
+        dueDate: "",
+        priority: "Low",
+      };
+
+      function handleInput(event) {
+        const fieldName = event.target.name;
+        const fieldValue = event.target.value;
+
+        formData = {
+          ...formData,
+          [fieldName]: fieldValue,
+        };
+
+        render();
+      }
+
+      function render() {
+        root.innerHTML = `
+            <h1>TASK MASTER</h1>
+            <form>
+                <div>
+                    <label for="title">Judul Tugas</label> <br>
+                    <input type="text" id="title" name="title" value="${
+                      formData.title
+                    }" placeholder="Masukkan judul tugas..." oninput="handleInput(event)"/>
+                </div>
+                <div>
+                    <label for="dueDate">Tenggat Waktu</label> <br>
+                    <input type="date" id="dueDate" name="dueDate" placeholder="Masukkan tenggat waktu..." oninput="handleInput(event)"/>
+                </div>
+                <div>
+                    <label for="priority">Prioritas</label> <br>
+                    <select id="priority" name="priority" oninput="handleInput(event)">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+            </form>
+            <div>
+                <h3>Isi Object</h3>
+                <pre>${JSON.stringify(formData, null, 2)}</pre>
+            </div>
+        `;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
