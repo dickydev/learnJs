@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 15 - Value vs Reference</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const root = document.getElementById("root");
+
+      let tasks = [
+        { id: 1, title: "Belajar HTML" },
+        { id: 2, title: "Belajar CSS" },
+      ];
+
+      let errorMsg = "";
+
+      function isDuplicate(judulBaru) {
+        return tasks.some((task) => {
+          return task.title.toLowerCase() === judulBaru.toLowerCase();
+        });
+      }
+
+      function addTask() {
+        const input = document.getElementById("inputTitle");
+        const judul = input.value.trim();
+
+        if (!judul) return;
+
+        if (isDuplicate(judul)) {
+          errorMsg = `Gagall : Tugas ${judul} Sudah ada!!!`;
+          render();
+          return;
+        }
+
+        errorMsg = "";
+
+        const newTask = {
+          id: tasks.length + 1,
+          title: judul,
+        };
+
+        tasks = [...tasks, newTask];
+        input.value = "";
+        render();
+      }
+
+      function render() {
+        root.innerHTML = `
+            <h1>Task Manager </h1>
+
+            <div>
+                <input
+                    type="text"
+                    id="inputTitle"
+                    placeholder="Masukkan judul tugas baruu...."
+                />
+                <button onclick="addTask()">Tambah</button>
+            </div>
+
+            ${errorMsg ? `<p>${errorMsg}</p>` : ""}
+
+            <h3>Daftar Tugas</h3>
+            <ul>
+                ${tasks
+                  .map(
+                    (task) => `
+                <li>${task.title} | ID : ${task.id}</li>
+                `,
+                  )
+                  .join("")}
+            </ul>
+        `;
+      }
+
+      render();
+    </script>
+  </body>
+</html>

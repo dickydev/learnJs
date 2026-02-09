@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi 16 - Date Object & Formatting</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root");
+
+      let tasks = [
+        { id: 1, title: "Belajar HTML", date: "2026-02-07" },
+        { id: 2, title: "Belajar CSS", date: "2026-02-08" },
+        { id: 2, title: "Belajar CSS", date: "2026-08-08" },
+        { id: 2, title: "Belajar CSS", date: "2026-12-08" },
+      ];
+
+      function formatTanggal(tanggal) {
+        if (!tanggal) return "-";
+
+        const dateObj = new Date(tanggal);
+
+        const opsi = {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        };
+
+        return dateObj.toLocaleDateString("id-ID", opsi);
+      }
+
+      function render() {
+        root.innerHTML = `
+            <h1>Task Manager </h1>
+            <h3>Daftar Tugas</h3>
+            <ul>
+                ${tasks
+                  .map(
+                    (task) => `
+                <li>${task.title} | ID : ${task.id} | Tanggal : ${formatTanggal(task.date)}</li>
+                `,
+                  )
+                  .join("")}
+            </ul>
+        `;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
